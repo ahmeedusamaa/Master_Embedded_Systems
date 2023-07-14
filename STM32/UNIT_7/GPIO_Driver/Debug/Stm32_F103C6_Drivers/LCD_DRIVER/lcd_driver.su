@@ -1,0 +1,2 @@
+lcd_driver.c:11:6:LCD_GPIO_init	4	static
+lcd_driver.c:15:6:LCD_INIT	4	static
