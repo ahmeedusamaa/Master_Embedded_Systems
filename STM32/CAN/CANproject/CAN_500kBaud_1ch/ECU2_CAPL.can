@@ -1,0 +1,39 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+  message Speed_val_message m_speed;
+  int variable_Speed=0;
+}
+
+on start
+{
+  write ("ECU2: recieved from ECU1");
+}
+
+on message ACC_CMD_message
+{
+  if(this.ACC_ON.phys == 1) //ACC on
+  {
+    if(variable_Speed == 255)
+      variable_Speed = 255;
+    else
+      variable_Speed++;
+    
+  }else // no ACC
+  {
+    if(variable_Speed == 0)
+      variable_Speed = 0;
+    else
+      variable_Speed--;
+  }
+  m_speed.Speed.phys = variable_Speed;
+  output(m_speed);
+}
+
+
+

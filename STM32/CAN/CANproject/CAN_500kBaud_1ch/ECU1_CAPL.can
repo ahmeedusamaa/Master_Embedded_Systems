@@ -1,0 +1,35 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+  msTimer send_timer;
+  const int timerPeriod = 1000;
+  message ACC_CMD_message Acc_CMD;
+  int variable_ACC=0;
+}
+
+on start
+{
+  write ("Ahmed: CANlab");
+  setTimer (send_timer , timerPeriod);
+}
+
+on message Speed_val_message
+{
+  write ("ECU1: recieved from ECU2");
+}
+
+on timer send_timer
+{
+  write ("Ahmed: CANlab");
+  variable_ACC=@sysvar::acc_val;
+  Acc_CMD.ACC_ON.phys = variable_ACC;
+  output(Acc_CMD);
+  setTimer(send_timer , timerPeriod);
+}
+
+
